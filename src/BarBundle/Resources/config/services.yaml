@@ -1,0 +1,14 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  App\BarBundle\:
+    resource: '../*'
+    exclude: '../{Entity,Document,Repository,EventListener,Tests,Exception,Interfaces}'
+
+  App\BarBundle\Command\BarHiCommand:
+    tags:
+      - console.command
+      - { name: 'chain.command', parent: 'foo:hello' }

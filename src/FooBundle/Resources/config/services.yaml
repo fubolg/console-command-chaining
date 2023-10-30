@@ -1,0 +1,13 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  App\FooBundle\:
+    resource: '../*'
+    exclude: '../{Entity,Document,Repository,EventListener,Tests,Exception,Interfaces}'
+
+  App\FooBundle\Command\FooHelloCommand:
+    tags:
+      - console.command

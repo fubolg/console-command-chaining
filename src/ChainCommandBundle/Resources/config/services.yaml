@@ -1,0 +1,21 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  App\BarBundle\:
+    resource: '../*'
+    exclude: '../{Entity,Document,Repository,EventListener,Tests,Exception,Interfaces}'
+
+  monolog.formatter.chain:
+    class: Monolog\Formatter\LineFormatter
+    arguments:
+      - "[%%datetime%%]: %%message%%\n"
+      - "Y-m-d H:i:s"
+
+  App\ChainCommandBundle\Service\ChainCommandRegistry: ~
+  App\ChainCommandBundle\Interfaces\ChainCommandRegistryInterface: '@App\ChainCommandBundle\Service\ChainCommandRegistry'
+
+  App\ChainCommandBundle\EventListener\ConsoleSubscriber:
+    tags: [kernel.event_subscriber]
